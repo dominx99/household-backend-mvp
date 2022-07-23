@@ -27,7 +27,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
       - "traefik.http.routers.household_api.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.portfolio.tls.certresolver=lets_encrypt_resolver"
+      - "traefik.http.routers.household_api.tls.certresolver=lets_encrypt_resolver"
     networks:
       proxy:
         ipv4_address: 10.200.1.2
