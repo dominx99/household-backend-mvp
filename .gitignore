@@ -8,3 +8,5 @@
 
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
+
+/config/jwt/*.pem

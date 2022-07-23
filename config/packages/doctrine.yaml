@@ -18,7 +18,15 @@ doctrine:
         is_bundle: false
         dir: '%kernel.project_dir%/src/ShoppingLists/Domain'
         prefix: 'App\ShoppingLists\Domain'
-        alias: ShoppingLists
+      Auth:
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/Auth/Domain'
+        prefix: 'App\Auth\Domain'
+      App:
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/Entity'
+        prefix: 'App\Entity'
+        alias: App
 
 when@test:
   doctrine:
