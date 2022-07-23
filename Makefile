@@ -60,9 +60,10 @@ rebuild: composer-env-file
 composer-env-file:
 	@if [ ! -f .env.local ]; then echo '' > .env.local; fi
 
+.PHONY: fix
 fix:
-	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix src
-	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix tests
+	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix src --allow-risky=yes --dry-run
+	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix tests --allow-risky=yes --dry-run
 
 clear:
 	@sudo rm -rf ./apps/*/*/var

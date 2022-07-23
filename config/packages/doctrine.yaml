@@ -1,0 +1,45 @@
+doctrine:
+  dbal:
+    connections:
+      household:
+        driver: '%env(HOUSEHOLD_DATABASE_DRIVER)%'
+        user: '%env(HOUSEHOLD_DATABASE_USER)%'
+        password: '%env(HOUSEHOLD_DATABASE_PASSWORD)%'
+        dbname: '%env(HOUSEHOLD_DATABASE_NAME)%'
+        host: '%env(HOUSEHOLD_DATABASE_HOST)%'
+        port: '%env(HOUSEHOLD_DATABASE_PORT)%'
+  orm:
+    auto_generate_proxy_classes: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+
+    mappings:
+      ShoppingLists:
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/ShoppingLists/Domain'
+        prefix: 'App\ShoppingLists\Domain'
+        alias: ShoppingLists
+
+when@test:
+  doctrine:
+    dbal:
+      dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+  doctrine:
+    orm:
+      auto_generate_proxy_classes: false
+      query_cache_driver:
+        type: pool
+        pool: doctrine.system_cache_pool
+      result_cache_driver:
+        type: pool
+        pool: doctrine.result_cache_pool
+
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

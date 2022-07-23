@@ -35,7 +35,7 @@ services:
   db:
     image: mysql
     volumes:
-      - ./../data/mysql:/var/lib/mysql
+      - ./../data/new-api/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=household

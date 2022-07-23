@@ -8,6 +8,13 @@ services:
   App\:
     resource: '../src/'
     exclude:
-      - '../src/DependencyInjection/'
-      - '../src/Entity/'
       - '../src/Kernel.php'
+      - '../src/ShoppingLists/Domain'
+
+  App\ShoppingLists\Http\:
+    resource: '../src/ShoppingLists/Http'
+    tags: ['controller.service_arguments']
+
+  App\Shared\Infrastructure\Symfony\ApiExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onException }
