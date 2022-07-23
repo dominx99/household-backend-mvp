@@ -6,6 +6,7 @@ make up
 ```
 
 ### Features
+- [ ] Household
 - [ ] Shopping Lists
 - [ ] Duties
 - [ ] Recipes
