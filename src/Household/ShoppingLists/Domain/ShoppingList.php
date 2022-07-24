@@ -2,8 +2,12 @@
 
 namespace App\Household\ShoppingLists\Domain;
 
+use App\Household\ShoppingListItems\Domain\ShoppingListItem;
 use App\Household\ShoppingLists\Infrastructure\Persistence\ShoppingListRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Household\Groups\Domain\Group;
 
@@ -21,7 +25,17 @@ class ShoppingList
 
     #[ORM\ManyToOne(inversedBy: 'shoppingLists')]
     #[ORM\JoinColumn(nullable: false)]
+    #[MaxDepth(1)]
     private ?Group $shoppingListGroup = null;
+
+    #[ORM\OneToMany(mappedBy: 'shoppingList', targetEntity: ShoppingListItem::class, orphanRemoval: true)]
+    #[MaxDepth(1)]
+    private Collection $shoppingListItems;
+
+    public function __construct()
+    {
+        $this->shoppingListItems = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -48,6 +62,36 @@ class ShoppingList
     public function setShoppingListGroup(?Group $shoppingListGroup): self
     {
         $this->shoppingListGroup = $shoppingListGroup;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ShoppingListItem>
+     */
+    public function getShoppingListItems(): Collection
+    {
+        return $this->shoppingListItems;
+    }
+
+    public function addShoppingListItem(ShoppingListItem $shoppingListItem): self
+    {
+        if (!$this->shoppingListItems->contains($shoppingListItem)) {
+            $this->shoppingListItems[] = $shoppingListItem;
+            $shoppingListItem->setShoppingList($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShoppingListItem(ShoppingListItem $shoppingListItem): self
+    {
+        if ($this->shoppingListItems->removeElement($shoppingListItem)) {
+            // set the owning side to null (unless already changed)
+            if ($shoppingListItem->getShoppingList() === $this) {
+                $shoppingListItem->setShoppingList(null);
+            }
+        }
 
         return $this;
     }

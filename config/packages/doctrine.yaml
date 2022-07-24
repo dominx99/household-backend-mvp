@@ -14,10 +14,6 @@ doctrine:
     auto_mapping: true
 
     mappings:
-      ShoppingLists:
-        is_bundle: false
-        dir: '%kernel.project_dir%/src/Household/ShoppingLists/Domain'
-        prefix: 'App\Household\ShoppingLists\Domain'
       Auth:
         is_bundle: false
         dir: '%kernel.project_dir%/src/Auth/Domain'
@@ -26,6 +22,14 @@ doctrine:
         is_bundle: false
         dir: '%kernel.project_dir%/src/Household/Groups/Domain'
         prefix: 'App\Household\Groups\Domain'
+      ShoppingLists:
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/Household/ShoppingLists/Domain'
+        prefix: 'App\Household\ShoppingLists\Domain'
+      ShoppingListItems:
+        is_bundle: false
+        dir: '%kernel.project_dir%/src/Household/ShoppingListItems/Domain'
+        prefix: 'App\Household\ShoppingListItems\Domain'
 
 when@test:
   doctrine:

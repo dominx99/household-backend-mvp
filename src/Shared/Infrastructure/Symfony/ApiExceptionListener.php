@@ -20,6 +20,7 @@ final class ApiExceptionListener
     public function onException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
+        dd($exception);
 
         $event->setResponse(
             new JsonResponse(
