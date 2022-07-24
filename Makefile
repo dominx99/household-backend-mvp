@@ -62,8 +62,8 @@ composer-env-file:
 
 .PHONY: fix
 fix:
-	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix src --allow-risky=yes --dry-run
-	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix tests --allow-risky=yes --dry-run
+	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix src --allow-risky=yes
+	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix tests --allow-risky=yes
 
 clear:
 	@sudo rm -rf ./apps/*/*/var

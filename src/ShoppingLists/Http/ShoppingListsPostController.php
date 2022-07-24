@@ -15,15 +15,16 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 final class ShoppingListsPostController
 {
-    public function __construct(private ShoppingListRepository $repository)
-    {
+    public function __construct(
+        private ShoppingListRepository $repository,
+    ) {
     }
 
     #[Route('api/v1/shopping-lists', methods: ['POST'])]
     #[ParamConverter('shoppingList', converter: 'fos_rest.request_body')]
     public function __invoke(
         ShoppingList $shoppingList,
-        ConstraintViolationListInterface $violations
+        ConstraintViolationListInterface $violations,
     ): JsonResponse {
         $violations->count() > 0
             ? $this->validate($violations)
