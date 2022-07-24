@@ -22,11 +22,10 @@ doctrine:
         is_bundle: false
         dir: '%kernel.project_dir%/src/Auth/Domain'
         prefix: 'App\Auth\Domain'
-      App:
+      Groups:
         is_bundle: false
-        dir: '%kernel.project_dir%/src/Entity'
-        prefix: 'App\Entity'
-        alias: App
+        dir: '%kernel.project_dir%/src/Household/Groups/Domain'
+        prefix: 'App\Household\Groups\Domain'
 
 when@test:
   doctrine:

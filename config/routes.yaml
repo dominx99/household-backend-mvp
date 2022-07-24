@@ -1,5 +1,5 @@
 controllers:
-  resource: ../src/ShoppingLists/Http/
+  resource: ../src/Household/Groups/Http/
   type: attribute
 
 api_login_check:

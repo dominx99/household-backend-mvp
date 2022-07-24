@@ -2,11 +2,18 @@
 
 namespace App\Auth\Domain;
 
+use App\Household\Groups\Domain\Group;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity()]
+#[ORM\UniqueConstraint(name: 'email_uidx', columns: ['email'])]
+#[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -14,7 +21,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Unique()]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -22,6 +30,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private array $roles = [];
+
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'users')]
+    private Collection $userGroups;
+
+    public function __construct()
+    {
+        $this->userGroups = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -72,6 +88,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Group>
+     */
+    public function getUserGroups(): Collection
+    {
+        return $this->userGroups;
+    }
+
+    public function addUserGroup(Group $userGroup): self
+    {
+        if (!$this->userGroups->contains($userGroup)) {
+            $this->userGroups[] = $userGroup;
+            $userGroup->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroup(Group $userGroup): self
+    {
+        if ($this->userGroups->removeElement($userGroup)) {
+            $userGroup->removeUser($this);
+        }
 
         return $this;
     }

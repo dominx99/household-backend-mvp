@@ -15,6 +15,11 @@ services:
     resource: '../src/ShoppingLists/Http'
     tags: ['controller.service_arguments']
 
+  App\Household\Groups\Http\:
+    resource: '../src/Household/Groups/Http'
+    tags: ['controller.service_arguments']
+
+
   App\Shared\Infrastructure\Symfony\ApiExceptionListener:
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onException }

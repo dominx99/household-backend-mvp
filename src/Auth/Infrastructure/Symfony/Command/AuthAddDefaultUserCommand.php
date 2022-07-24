@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Command;
+namespace App\Auth\Infrastructure\Symfony\Command;
 
 use App\Auth\Domain\User;
 use Doctrine\ORM\EntityManagerInterface;
