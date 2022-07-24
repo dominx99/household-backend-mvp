@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Household\Groups\Http;
 
+use App\Household\Groups\Application\Create\GroupCreator;
 use App\Household\Groups\Domain\Group;
-use App\Household\Groups\Infrastructure\Persistence\GroupRepository;
 use App\Shared\Http\Symfony\ApiController;
 use App\Shared\Http\Symfony\SuccessResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use function Lambdish\Phunctional\apply;
 
 final class GroupsPostController extends ApiController
 {
-    public function __construct(private GroupRepository $repository)
+    public function __construct(private GroupCreator $creator)
     {
     }
 
@@ -34,6 +35,6 @@ final class GroupsPostController extends ApiController
 
     private function createGroup(Group $group): void
     {
-        $this->repository->save($group);
+        apply($this->creator, [$group]);
     }
 }
