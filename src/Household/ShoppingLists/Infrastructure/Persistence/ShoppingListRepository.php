@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ShoppingLists\Infrastructure\Persistence;
+namespace App\Household\ShoppingLists\Infrastructure\Persistence;
 
-use App\ShoppingLists\Domain\ShoppingList;
+use App\Household\ShoppingLists\Domain\ShoppingList;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

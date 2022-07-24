@@ -1,9 +1,13 @@
-controllers:
+groups_controllers:
   resource: ../src/Household/Groups/Http/
   type: attribute
 
+shopping_lists_controllers:
+  resource: ../src/Household/ShoppingLists/Http/
+  type: attribute
+
 api_login_check:
-    path: /api/v1/login
+  path: /api/v1/login
 
 api_refresh_token:
   path: /api/v1/token/refresh

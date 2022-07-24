@@ -2,40 +2,43 @@
 
 declare(strict_types=1);
 
-namespace App\ShoppingLists\Http;
+namespace App\Household\ShoppingLists\Http;
 
+use App\Household\ShoppingLists\Application\Create\ShoppingListCreator;
+use App\Household\ShoppingLists\Domain\ShoppingList;
 use App\Shared\Domain\Utils;
 use App\Shared\Domain\ValidationFailedError;
-use App\ShoppingLists\Domain\ShoppingList;
-use App\ShoppingLists\Infrastructure\Persistence\ShoppingListRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
+use function Lambdish\Phunctional\apply;
+
 final class ShoppingListsPostController
 {
     public function __construct(
-        private ShoppingListRepository $repository,
+        private ShoppingListCreator $creator,
     ) {
     }
 
-    #[Route('api/v1/shopping-lists', methods: ['POST'])]
+    #[Route('api/v1/groups/{groupId}/shopping-lists', methods: ['POST'])]
     #[ParamConverter('shoppingList', converter: 'fos_rest.request_body')]
     public function __invoke(
-        ShoppingList $shoppingList,
         ConstraintViolationListInterface $violations,
+        ShoppingList $shoppingList,
+        string $groupId,
     ): JsonResponse {
         $violations->count() > 0
             ? $this->validate($violations)
-            : $this->createShoppingList($shoppingList);
+            : $this->createShoppingList($shoppingList, $groupId);
 
         return new JsonResponse(['status' => 'OK']);
     }
 
-    private function createShoppingList(ShoppingList $shoppingList): void
+    private function createShoppingList(ShoppingList $shoppingList, string $groupId): void
     {
-        $this->repository->save($shoppingList);
+        apply($this->creator, [$shoppingList, $groupId]);
     }
 
     private function validate(ConstraintViolationListInterface $violations): void

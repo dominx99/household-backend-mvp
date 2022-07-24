@@ -1,10 +1,11 @@
 <?php
 
-namespace App\ShoppingLists\Domain;
+namespace App\Household\ShoppingLists\Domain;
 
-use App\ShoppingLists\Infrastructure\Persistence\ShoppingListRepository;
+use App\Household\ShoppingLists\Infrastructure\Persistence\ShoppingListRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Household\Groups\Domain\Group;
 
 #[ORM\Entity(repositoryClass: ShoppingListRepository::class)]
 class ShoppingList
@@ -17,6 +18,10 @@ class ShoppingList
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
     private ?string $name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'shoppingLists')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Group $shoppingListGroup = null;
 
     public function getId(): ?int
     {
@@ -31,6 +36,18 @@ class ShoppingList
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getShoppingListGroup(): ?Group
+    {
+        return $this->shoppingListGroup;
+    }
+
+    public function setShoppingListGroup(?Group $shoppingListGroup): self
+    {
+        $this->shoppingListGroup = $shoppingListGroup;
 
         return $this;
     }

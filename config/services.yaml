@@ -9,10 +9,10 @@ services:
     resource: '../src/'
     exclude:
       - '../src/Kernel.php'
-      - '../src/ShoppingLists/Domain'
+      - '../src/Household/ShoppingLists/Domain'
 
-  App\ShoppingLists\Http\:
-    resource: '../src/ShoppingLists/Http'
+  App\Household\ShoppingLists\Http\:
+    resource: '../src/Household/ShoppingLists/Http'
     tags: ['controller.service_arguments']
 
   App\Household\Groups\Http\:

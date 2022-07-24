@@ -16,8 +16,8 @@ doctrine:
     mappings:
       ShoppingLists:
         is_bundle: false
-        dir: '%kernel.project_dir%/src/ShoppingLists/Domain'
-        prefix: 'App\ShoppingLists\Domain'
+        dir: '%kernel.project_dir%/src/Household/ShoppingLists/Domain'
+        prefix: 'App\Household\ShoppingLists\Domain'
       Auth:
         is_bundle: false
         dir: '%kernel.project_dir%/src/Auth/Domain'
