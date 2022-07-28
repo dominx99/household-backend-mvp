@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GroupRepository::class)]
@@ -27,9 +28,11 @@ class Group
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userGroups')]
+    #[MaxDepth(1)]
     private Collection $users;
 
     #[ORM\OneToMany(mappedBy: 'shoppingListGroup', targetEntity: ShoppingList::class, orphanRemoval: true)]
+    #[MaxDepth(1)]
     private Collection $shoppingLists;
 
     public function __construct()
