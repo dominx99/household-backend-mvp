@@ -4,7 +4,7 @@ namespace App\Household\ShoppingListItems\Domain;
 
 use App\Household\ShoppingListItems\Infrastructure\Persistence\ShoppingListItemRepository;
 use Doctrine\ORM\Mapping as ORM;
-use \App\Household\ShoppingLists\Domain\ShoppingList;
+use App\Household\ShoppingLists\Domain\ShoppingList;
 use JMS\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: ShoppingListItemRepository::class)]

@@ -10,6 +10,7 @@ use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 abstract class ApiController extends AbstractFOSRestController
@@ -17,6 +18,11 @@ abstract class ApiController extends AbstractFOSRestController
     public function throwValidationFailedError(ConstraintViolationListInterface $violations): void
     {
         throw new ValidationFailedError(Utils::formatViolations($violations));
+    }
+
+    public function throwNotFound(string $message): void
+    {
+        throw new NotFoundHttpException($message);
     }
 
     public function respond(mixed $data): Response
