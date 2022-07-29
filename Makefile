@@ -5,6 +5,9 @@ household-bin-location := "./bin"
 household-console-location := "./bin/console"
 env-file := "./.env.local"
 
+.PHONY: prod
+prod: CMD=--env-file $(env-file) -f docker-compose.prod.yml up --build -d
+
 # 🐳 Docker Compose
 .PHONY: up
 up: CMD=--env-file $(env-file) up --build -d
@@ -47,7 +50,7 @@ composer-require-module: INTERACTIVE=-ti --interactive
 # Usage: `make doco CMD="ps --services"`
 # Usage: `make doco CMD="build --parallel --pull --force-rm --no-cache"`
 .PHONY: doco
-doco up stop destroy: composer-env-file
+doco up prod stop destroy: composer-env-file
 	@docker-compose $(CMD)
 
 .PHONY: rebuild
