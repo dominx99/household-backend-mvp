@@ -5,4 +5,9 @@ etc/infrastructure/mysql/wait-for-connection
 php bin/console doctrine:database:create --if-not-exists --env=test
 php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
+if [ "$APP_ENV" = "dev" ]; then
+    php bin/console doctrine:database:create --if-not-exists --env=test
+    php bin/console doctrine:migrations:migrate --no-interaction --env=test
+fi
+
 php-fpm
