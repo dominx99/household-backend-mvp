@@ -69,8 +69,7 @@ fix:
 	@docker-compose exec $(household-php-service) php vendor/bin/php-cs-fixer fix tests --allow-risky=yes
 
 clear:
-	@sudo rm -rf ./apps/*/*/var
-	@docker-compose exec $(household-php-service) php $(household-console-location) cache:warmup
+	@docker-compose exec $(household-php-service) php $(household-console-location) cache:clear
 	@docker-compose exec $(household-php-service) php $(household-console-location) doctrine:cache:clear-metadata
 	@docker-compose exec $(household-php-service) php $(household-console-location) doctrine:cache:clear-query
 	@docker-compose exec $(household-php-service) php $(household-console-location) doctrine:cache:clear-result
@@ -108,3 +107,6 @@ static-analysis st: composer-env-file
 .PHONY: console
 console:
 	docker-compose exec $(household-php-service) $(household-console-location) $(CMD)
+
+.PHONY: bash
+	docker-compose exec $(household-php-service) $(household-console-location) bash
