@@ -8,6 +8,7 @@ use App\Household\ShoppingLists\Application\Create\ShoppingListCreator;
 use App\Household\ShoppingLists\Domain\ShoppingList;
 use App\Shared\Domain\Utils;
 use App\Shared\Domain\ValidationFailedError;
+use App\Shared\Http\Symfony\SuccessResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,7 +34,7 @@ final class ShoppingListsPostController
             ? $this->validate($violations)
             : $this->createShoppingList($shoppingList, $groupId);
 
-        return new JsonResponse(['status' => 'OK']);
+        return new SuccessResponse(SuccessResponse::HTTP_CREATED);
     }
 
     private function createShoppingList(ShoppingList $shoppingList, string $groupId): void

@@ -31,7 +31,7 @@ final class GroupsPostController extends ApiController
             ? $this->throwValidationFailedError($violations)
             : $this->createGroup($group);
 
-        return new SuccessResponse();
+        return new SuccessResponse(SuccessResponse::HTTP_CREATED);
     }
 
     private function createGroup(Group $group): void

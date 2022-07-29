@@ -17,7 +17,7 @@ use function Lambdish\Phunctional\apply;
 
 final class ShoppingListItemsPostController extends ApiController
 {
-    #[Route('api/v1/shopping-lists/{shoppingListId}/items')]
+    #[Route('api/v1/shopping-lists/{shoppingListId}/items', methods: ['POST'])]
     #[ParamConverter('item', converter: 'fos_rest.request_body')]
     public function __invoke(
         ConstraintViolationListInterface $violations,
@@ -29,6 +29,6 @@ final class ShoppingListItemsPostController extends ApiController
             ? $this->throwValidationFailedError($violations)
             : apply($creator, [$item, $shoppingListId]);
 
-        return new SuccessResponse();
+        return new SuccessResponse(SuccessResponse::HTTP_CREATED);
     }
 }

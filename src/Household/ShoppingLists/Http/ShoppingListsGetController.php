@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class ShoppingListsGetController extends ApiController
 {
-    #[Route('api/v1/groups/{groupId}/shopping-lists')]
+    #[Route('api/v1/groups/{groupId}/shopping-lists', methods: ['GET'])]
     public function __invoke(ShoppingListRepository $repository, string $groupId): Response
     {
         return $this->respond(

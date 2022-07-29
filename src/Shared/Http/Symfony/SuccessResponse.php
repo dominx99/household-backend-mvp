@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class SuccessResponse extends JsonResponse
 {
-    public function __construct()
+    public function __construct(int $statusCode = JsonResponse::HTTP_OK)
     {
-        parent::__construct(['status' => 'OK'], JsonResponse::HTTP_OK);
+        parent::__construct(['status' => 'OK'], $statusCode);
     }
 }

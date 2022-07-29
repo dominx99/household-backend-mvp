@@ -15,7 +15,7 @@ final class ShoppingListItemsGetController extends ApiController
     {
     }
 
-    #[Route('api/v1/shopping-lists/{shoppingListId}/items')]
+    #[Route('api/v1/shopping-lists/{shoppingListId}/items', methods: ['GET'])]
     public function __invoke(string $shoppingListId): Response
     {
         return $this->respond(
