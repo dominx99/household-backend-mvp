@@ -4,7 +4,9 @@ etc/infrastructure/mysql/wait-for-connection
 
 php bin/console doctrine:database:create --if-not-exists
 php bin/console doctrine:migrations:migrate --no-interaction
-php bin/console lexik:jwt:generate-keypair --overwrite
+php bin/console lexik:jwt:generate-keypair
+make clear
+chmod var 777 -R
 
 if [ "$APP_ENV" = "dev" ]; then
     php bin/console doctrine:database:create --if-not-exists --env=test
