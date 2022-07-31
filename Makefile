@@ -12,10 +12,10 @@ prod: CMD=--env-file $(env-file) -f docker-compose.prod.yml up --build -d
 .PHONY: up
 up: CMD=--env-file $(env-file) up --build -d
 
-.PHONY: down
+.PHONY: stop
 stop: CMD=stop
 
-.PHONY: destroy
+.PHONY: down
 destroy: CMD=down
 
 .PHONY: build
