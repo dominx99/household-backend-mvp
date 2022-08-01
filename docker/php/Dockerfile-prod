@@ -1,6 +1,8 @@
 FROM php:8.1.6-fpm-alpine
 WORKDIR /application
 
+COPY --from=composer:2.3.7 /usr/bin/composer /usr/bin/composer
+
 RUN wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.7.9/pickle.phar \
     && mv pickle.phar /usr/local/bin/pickle \
     && chmod +x /usr/local/bin/pickle

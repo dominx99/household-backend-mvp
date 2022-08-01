@@ -26,8 +26,8 @@ deps: composer-install
 
 .PHONY: composer
 composer dump composer-install composer-update composer-require composer-require-module: composer-env-file
-	@docker run --rm $(INTERACTIVE) --volume $(current-dir):/app --user $(id -u):$(id -g) \
-		composer:2 $(CMD) \
+	@docker-compose exec $(household-php-service) \
+		composer $(CMD) \
 			--no-ansi
 
 .PHONY: dump
@@ -131,4 +131,4 @@ refresh-repository:
 	git pull
 
 .PHONY: deploy
-deploy: refresh-repository deps migrate down prod
+deploy: down refresh-repository prod deps migrate
