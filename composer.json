@@ -29,7 +29,9 @@
         "symfony/yaml": "6.1.*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.9",
+        "fzaninotto/faker": "^1.5",
         "symfony/maker-bundle": "^1.44"
     },
     "config": {

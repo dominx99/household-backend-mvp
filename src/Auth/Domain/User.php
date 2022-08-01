@@ -17,9 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column()]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?string $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Unique()]
@@ -39,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->userGroups = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

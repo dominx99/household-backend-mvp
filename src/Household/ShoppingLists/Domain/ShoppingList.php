@@ -15,9 +15,10 @@ use App\Household\Groups\Domain\Group;
 class ShoppingList
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column()]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
@@ -37,7 +38,7 @@ class ShoppingList
         $this->shoppingListItems = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

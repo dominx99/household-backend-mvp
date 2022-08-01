@@ -110,3 +110,14 @@ console:
 
 .PHONY: bash
 	docker-compose exec $(household-php-service) $(household-console-location) bash
+
+remove-database:
+	@docker-compose exec $(service) $(household-php-service) $(household-console-location) doctrine:database:drop --if-exists --force $(CMD)
+
+create-database:
+	@docker-compose exec $(service) $(household-php-service) $(household-console-location) doctrine:database:create $(CMD)
+
+fixtures:
+	@docker-compose exec $(household-php-service) $(household-console-location) doctrine:fixtures:load
+
+refresh-database: remove-database create-database migrate fixtures

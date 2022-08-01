@@ -11,9 +11,10 @@ use JMS\Serializer\Annotation\MaxDepth;
 class ShoppingListItem
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column()]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -29,7 +30,7 @@ class ShoppingListItem
     #[MaxDepth(1)]
     private ?ShoppingList $shoppingList = null;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
