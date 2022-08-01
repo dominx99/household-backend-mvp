@@ -130,5 +130,8 @@ refresh-database: remove-database create-database migrate fixtures
 refresh-repository:
 	git pull
 
+update-permissions:
+	chmod 777 ./var -R
+
 .PHONY: deploy
-deploy: down refresh-repository prod deps migrate
+deploy: down refresh-repository prod deps migrate clear update-permissions
