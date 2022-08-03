@@ -11,7 +11,6 @@ RUN apk --update upgrade \
     && apk add --no-cache autoconf automake make gcc g++ bash icu-dev libzip-dev rabbitmq-c rabbitmq-c-dev \
     && docker-php-ext-install -j$(nproc) \
         bcmath \
-        opcache \
         intl \
         zip \
         pdo_mysql
@@ -23,7 +22,6 @@ RUN apk add git
 RUN sh /root/install-xdebug.sh
 
 RUN docker-php-ext-enable \
-        apcu \
-        opcache
+        apcu
 
 COPY etc/infrastructure/php/ /usr/local/etc/php/

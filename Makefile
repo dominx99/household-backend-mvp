@@ -16,7 +16,7 @@ up: CMD=--env-file $(env-file) up --build -d
 stop: CMD=stop
 
 .PHONY: down
-destroy: CMD=down
+down: CMD=down
 
 .PHONY: build
 build: deps up
@@ -50,7 +50,7 @@ composer-require-module: INTERACTIVE=-ti --interactive
 # Usage: `make doco CMD="ps --services"`
 # Usage: `make doco CMD="build --parallel --pull --force-rm --no-cache"`
 .PHONY: doco
-doco up prod stop destroy: composer-env-file
+doco up prod stop down: composer-env-file
 	@docker-compose $(CMD)
 
 .PHONY: rebuild

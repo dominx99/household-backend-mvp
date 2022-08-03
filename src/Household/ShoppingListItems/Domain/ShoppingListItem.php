@@ -6,6 +6,7 @@ use App\Household\ShoppingListItems\Infrastructure\Persistence\ShoppingListItemR
 use Doctrine\ORM\Mapping as ORM;
 use App\Household\ShoppingLists\Domain\ShoppingList;
 use JMS\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ShoppingListItemRepository::class)]
 class ShoppingListItem
@@ -14,9 +15,11 @@ class ShoppingListItem
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    #[Assert\NotBlank(groups: ['PUT'])]
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, options: ['default' => 'units'])]
