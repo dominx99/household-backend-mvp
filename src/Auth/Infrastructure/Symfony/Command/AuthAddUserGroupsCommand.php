@@ -44,6 +44,8 @@ final class AuthAddUserGroupsCommand extends Command
         try {
             $user = $this->userRepository->findOneBy(['email' => $input->getOption('username')]);
             $groupsAddedCount = $this->addGroupsToUser($input->getOption('groups'), $user);
+
+            $this->userRepository->save($user);
         } catch (Throwable $e) {
             $io->error(['Failed to add groups for user', (string) $e]);
 
