@@ -3,8 +3,8 @@
 namespace App\Household\Groups\Domain;
 
 use App\Auth\Domain\User;
+use App\Household\Groups\Infrastructure\Persistence\GroupRepository;
 use App\Household\ShoppingLists\Domain\ShoppingList;
-use App\Repository\App\Household\Groups\Domain\GroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

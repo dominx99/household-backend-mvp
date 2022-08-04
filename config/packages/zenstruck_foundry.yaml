@@ -1,0 +1,5 @@
+when@dev: &dev
+  zenstruck_foundry:
+    auto_refresh_proxies: false
+
+when@test: *dev
