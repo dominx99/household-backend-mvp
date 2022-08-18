@@ -37,6 +37,13 @@ class ShoppingListItem
         return $this->id;
     }
 
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
