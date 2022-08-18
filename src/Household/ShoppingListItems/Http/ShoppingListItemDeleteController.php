@@ -19,7 +19,7 @@ final class ShoppingListItemDeleteController extends ApiController
     public function __invoke(string $shoppingListItemId): SuccessResponse
     {
         if (!$shoppingListItem = $this->repository->find($shoppingListItemId)) {
-            $this->throwNotFound(sprintf('Shopping list item %s not found'));
+            $this->throwNotFound(sprintf('Shopping list item %s not found', $shoppingListItemId));
         }
 
         $this->repository->remove($shoppingListItem);

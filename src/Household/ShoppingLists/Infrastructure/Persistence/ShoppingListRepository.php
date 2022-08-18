@@ -30,7 +30,7 @@ class ShoppingListRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ShoppingList $entity, bool $flush = false): void
+    public function remove(ShoppingList $entity, bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
 
