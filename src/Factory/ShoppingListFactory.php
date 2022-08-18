@@ -31,6 +31,7 @@ final class ShoppingListFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
+            'id' => self::faker()->uuid(),
             'name' => self::faker()->words(rand(1, 3), true),
             'shoppingListGroup' => GroupFactory::random(),
         ];

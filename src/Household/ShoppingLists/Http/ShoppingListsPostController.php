@@ -24,7 +24,11 @@ final class ShoppingListsPostController
     }
 
     #[Route('api/v1/groups/{groupId}/shopping-lists', methods: ['POST'])]
-    #[ParamConverter('shoppingList', converter: 'fos_rest.request_body')]
+    #[ParamConverter('shoppingList', converter: 'fos_rest.request_body', options: [
+        'validator' => [
+            'groups' => ['POST'],
+        ],
+    ])]
     public function __invoke(
         ConstraintViolationListInterface $violations,
         ShoppingList $shoppingList,
