@@ -13,7 +13,7 @@ final class ShoppingListFixtures extends Fixture implements DependentFixtureInte
 {
     public function load(ObjectManager $manager): void
     {
-        ShoppingListFactory::createMany(25);
+        ShoppingListFactory::createMany(100);
     }
 
     public function getDependencies(): array

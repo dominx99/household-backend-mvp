@@ -13,7 +13,7 @@ final class ShoppingListItemFixtures extends Fixture implements DependentFixture
 {
     public function load(ObjectManager $manager): void
     {
-        ShoppingListItemFactory::createMany(100);
+        ShoppingListItemFactory::createMany(500);
     }
 
     public function getDependencies(): array

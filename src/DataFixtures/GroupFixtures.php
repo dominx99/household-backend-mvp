@@ -10,6 +10,6 @@ class GroupFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        GroupFactory::new()->createMany(10);
+        GroupFactory::new()->createMany(4);
     }
 }
