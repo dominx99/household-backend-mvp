@@ -18,13 +18,12 @@ class Group
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    #[Assert\NotBlank(groups: ['POST', 'PUT'])]
+    #[Assert\Uuid(groups: ['POST', 'PUT'])]
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank()]
-    #[Groups(['testiv'])]
+    #[Assert\NotBlank(groups: ['POST'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userGroups')]

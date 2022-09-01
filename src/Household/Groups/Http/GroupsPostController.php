@@ -22,7 +22,11 @@ final class GroupsPostController extends ApiController
     }
 
     #[Route('api/v1/groups', methods: ['POST'])]
-    #[ParamConverter('group', converter: 'fos_rest.request_body')]
+    #[ParamConverter('group', converter: 'fos_rest.request_body', options: [
+        'validator' => [
+            'groups' => ['POST'],
+        ],
+    ])]
     public function __invoke(
         Group $group,
         ConstraintViolationListInterface $violations
