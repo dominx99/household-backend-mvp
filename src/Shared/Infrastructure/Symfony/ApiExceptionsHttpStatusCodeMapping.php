@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Symfony;
 
-use App\Shared\Domain\Validation\ValidationFailedError;
+use App\Shared\Domain\ValidationFailedError;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
