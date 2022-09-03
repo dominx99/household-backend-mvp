@@ -32,7 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\NotBlank(groups: ['POST'])]
     #[Assert\Length(min: 8, max: 60, groups: ['POST'])]
-    #[Exclude()]
     private ?string $plainPassword = null;
 
     #[ORM\Column(length: 255)]

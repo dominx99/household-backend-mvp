@@ -31,7 +31,7 @@ final class UserPostController extends ApiController
     public function __invoke(User $user, ConstraintViolationListInterface $violations): JsonResponse
     {
         // TODO: Remove second validaiton, it's neccessary because param converter does not work for UniqueEntity
-        $violations = $this->validator->validate($user);
+        $violations = $this->validator->validate($user, null, ['POST']);
 
         $violations->count() > 0
             ? $this->throwValidationFailedError($violations)
