@@ -11,6 +11,10 @@ services:
       - '../src/Kernel.php'
       - '../src/Household/ShoppingLists/Domain'
 
+  App\Auth\Http\:
+    resource: '../src/Auth/Http'
+    tags: ['controller.service_arguments']
+
   App\Household\ShoppingLists\Http\:
     resource: '../src/Household/ShoppingLists/Http'
     tags: ['controller.service_arguments']

@@ -1,3 +1,7 @@
+users_controllers:
+  resource: ../src/Auth/Http/
+  type: attribute
+
 groups_controllers:
   resource: ../src/Household/Groups/Http/
   type: attribute

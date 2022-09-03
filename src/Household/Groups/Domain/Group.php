@@ -27,7 +27,7 @@ class Group
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userGroups')]
-    #[MaxDepth(1)]
+    #[MaxDepth(0)]
     private Collection $users;
 
     #[ORM\OneToMany(mappedBy: 'shoppingListGroup', targetEntity: ShoppingList::class, orphanRemoval: true)]
